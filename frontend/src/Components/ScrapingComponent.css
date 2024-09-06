@@ -1,0 +1,85 @@
+
+.scraped_data {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  max-height: 450px;  /* Fixed height for the table container */
+  overflow-y: auto;   /* Enable vertical scrolling inside the container */
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-family: sans-serif;
+}
+
+.scraped_table {
+  width: 100%;  /* Set the table width to 100% within the container */
+  border-collapse: collapse;
+}
+
+.table_data {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 25px;
+}
+
+.download_button {
+  background-color: rgb(246, 246, 242);
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 12px;
+  font-family: monospace;
+  color: black;
+  padding: 8px;
+  margin-left: 6px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  cursor: pointer;
+  align-items: center;
+}
+
+.download_button:hover {
+  background-color: rgb(245, 250, 100);
+}
+
+.search_term {
+  border-radius: 3px;
+  font-weight: bold;
+  font-family: monospace;
+  padding: 6px;
+  margin-left: 10px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+
+.num_of_page {
+  border-radius: 3px;
+  font-weight: bold;
+  font-family: monospace;
+  padding: 6px;
+  margin-left: 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.scrape_button {
+  background-color: rgb(246, 246, 242);
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 12px;
+  font-family: monospace;
+  color: black;
+  padding: 8px;
+  margin-left: 6px;
+  text-align: center;
+  cursor: pointer;
+  align-items: center;
+}
+
+.scrape_button:hover {
+  background-color: rgb(245, 250, 100);
+}
