@@ -18,6 +18,9 @@ app.post('/scrape', async (req, res) => {
   console.log(`Scraping Flipkart for: ${searchTerm} for ${numPages} pages`);
 
   // Initialize Puppeteer
+  // The below is for local testing
+  // const browser = await puppeteer.launch({ headless: true });
+  // The below is for actual deploy
   const browser = await puppeteer.launch({ headless: true,
     args: [
       "--disable-setuid-sandbox",
@@ -30,6 +33,7 @@ app.post('/scrape', async (req, res) => {
         ? process.env.PUPPETEER_EXECUTABLE_PATH
         : puppeteer.executablePath()
   });
+
   const page = await browser.newPage();
   
   // Load Flipkart homepage
