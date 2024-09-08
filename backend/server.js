@@ -2,6 +2,7 @@ const express = require('express');
 const puppeteer = require('puppeteer');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+require("dotenv").config();
 
 // Initialize express
 const app = express();
@@ -17,7 +18,18 @@ app.post('/scrape', async (req, res) => {
   console.log(`Scraping Flipkart for: ${searchTerm} for ${numPages} pages`);
 
   // Initialize Puppeteer
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({ headless: true,
+    args: [
+      "--disable-setuid-sandbox",
+      "--no-sandbox",
+      "--single-process",
+      "--no-zygote",
+    ],
+    executablePath:
+      process.env.NODE_ENV === "production"
+        ? process.env.PUPPETEER_EXECUTABLE_PATH
+        : puppeteer.executablePath()
+  });
   const page = await browser.newPage();
   
   // Load Flipkart homepage
