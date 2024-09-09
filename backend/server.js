@@ -8,18 +8,15 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3000
 
-// CORS options to allow requests from your frontend domain
+// Explicitly allowing your frontend Netlify URL
 const corsOptions = {
-  origin: 'https://fk-product-detail-scraper.netlify.app', // Your Netlify frontend URL
-  methods: ['GET', 'POST', 'OPTIONS'], // Allowing necessary methods including OPTIONS
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
-  credentials: true, // Allow credentials if needed
-  preflightContinue: false,
-  optionsSuccessStatus: 204
+  origin: 'https://fk-product-detail-scraper.netlify.app',
+  methods: 'GET,POST',
+  allowedHeaders: ['Content-Type'],
+  optionsSuccessStatus: 200, // For older browsers
 };
 
-// Use middleware
-app.use(cors(corsOptions)); // Applying CORS options
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
