@@ -9,22 +9,22 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3000
 
-// Explicitly allowing your frontend Netlify URL
-const corsOptions = {
-  origin: "*",
-  // origin: "https://fk-product-detail-scraper.netlify.app",
-  methods: "GET,POST",
-  allowedHeaders: ["Content-Type"],
-  optionsSuccessStatus: 200, // For older browsers
-};
+// // Explicitly allowing your frontend Netlify URL
+// const corsOptions = {
+//   // origin: "*",
+//   origin: "https://fk-product-detail-scraper.netlify.app",
+//   methods: "GET,POST,OPTIONS",
+//   allowedHeaders: ["Content-Type"],
+//   optionsSuccessStatus: 200, // For older browsers
+// };
 
-app.use(cors(corsOptions));
-// Handle preflight (OPTIONS) requests
-app.options('*', cors(corsOptions)); // Preflight handling
+// app.use(cors(corsOptions));
+// // Handle preflight (OPTIONS) requests
+// app.options('*', cors(corsOptions)); // Preflight handling
 
 
 // Use security and caching headers
-app.use(helmet());
+app.use(helmet({crossOriginResourcePolicy: false,}));
 
 // Add Cache-Control and other headers
 app.use((req, res, next) => {
@@ -36,7 +36,13 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 // Scrape Flipkart products based on search term and number of pages
-app.post('/scrape', async (req, res) => {
+app.post('/scrape', cors(corsOptions), async (req, res) => {
+
+  // Add CORS headers manually if needed
+  res.setHeader('Access-Control-Allow-Origin', 'https://fk-product-detail-scraper.netlify.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   const { searchTerm, numPages } = req.body;  // Get number of pages from request body
   console.log(`Scraping Flipkart for: ${searchTerm} for ${numPages} pages`);
 
@@ -61,7 +67,7 @@ app.post('/scrape', async (req, res) => {
   
   // Load Flipkart homepage
   await page.goto('https://www.flipkart.com/', { waitUntil: 'networkidle2' });
-  
+
   // Close the login popup if it appears
   try {
     await page.click('button._2KpZ6l._2doB4z');
@@ -69,6 +75,8 @@ app.post('/scrape', async (req, res) => {
     console.log('No login popup found.');
   }
   
+  await page.waitForSelector('input.Pke_EE', { timeout: 5000 });  // Wait for up to 5 seconds for the input to appear
+
   // Type in the search term
   await page.type('input.Pke_EE', searchTerm);
   
