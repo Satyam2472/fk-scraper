@@ -7,5 +7,8 @@
     "helmet": "^7.1.0",
     "puppeteer": "^22.15.0",
     "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17"
   }
 }
