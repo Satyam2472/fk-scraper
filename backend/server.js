@@ -16,7 +16,18 @@ const corsOptions = {
   optionsSuccessStatus: 200, // For older browsers
 };
 
+// Use security and caching headers
+app.use(helmet());
+
+// Add Cache-Control and other headers
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store');  // Adjust as needed
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  next();
+});
+
 app.use(cors(corsOptions));
+
 
 app.use(bodyParser.json());
 
