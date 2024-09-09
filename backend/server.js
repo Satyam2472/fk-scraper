@@ -8,8 +8,15 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3000
 
+// CORS options to allow requests from your frontend domain
+const corsOptions = {
+  origin: 'https://fk-product-detail-scraper.netlify.app', // Your Netlify frontend URL
+  methods: ['GET', 'POST'], // Define allowed HTTP methods
+  credentials: true, // If you need to send cookies or other credentials
+};
+
 // Use middleware
-app.use(cors());
+app.use(cors(corsOptions)); // Applying CORS options
 app.use(bodyParser.json());
 
 // Scrape Flipkart products based on search term and number of pages
