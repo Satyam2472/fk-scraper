@@ -1,6 +1,7 @@
 const express = require('express');
 const puppeteer = require('puppeteer');
 const cors = require('cors');
+const helmet = require('helmet');  // For security headers
 const bodyParser = require('body-parser');
 require("dotenv").config();
 
