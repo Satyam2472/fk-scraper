@@ -9,18 +9,18 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3000
 
-// // Explicitly allowing your frontend Netlify URL
-// const corsOptions = {
-//   // origin: "*",
-//   origin: "https://fk-product-detail-scraper.netlify.app",
-//   methods: "GET,POST,OPTIONS",
-//   allowedHeaders: ["Content-Type"],
-//   optionsSuccessStatus: 200, // For older browsers
-// };
+// Explicitly allowing your frontend Netlify URL
+const corsOptions = {
+  origin: "*",
+  // origin: "https://fk-product-detail-scraper.netlify.app",
+  methods: "GET,POST,OPTIONS",
+  allowedHeaders: ["Content-Type"],
+  optionsSuccessStatus: 200, // For older browsers
+};
 
-// app.use(cors(corsOptions));
-// // Handle preflight (OPTIONS) requests
-// app.options('*', cors(corsOptions)); // Preflight handling
+app.use(cors(corsOptions));
+// Handle preflight (OPTIONS) requests
+app.options('*', cors(corsOptions)); // Preflight handling
 
 
 // Use security and caching headers
@@ -37,12 +37,6 @@ app.use(bodyParser.json());
 
 // Scrape Flipkart products based on search term and number of pages
 app.post('/scrape', async (req, res) => {
-
-  // Add CORS headers manually if needed
-  res.setHeader('Access-Control-Allow-Origin', 'https://fk-product-detail-scraper.netlify.app');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.sendStatus(200);
 
   const { searchTerm, numPages } = req.body;  // Get number of pages from request body
   console.log(`Scraping Flipkart for: ${searchTerm} for ${numPages} pages`);
