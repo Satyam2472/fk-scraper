@@ -18,6 +18,11 @@ const corsOptions = {
   optionsSuccessStatus: 200, // For older browsers
 };
 
+app.use(cors(corsOptions));
+// Handle preflight (OPTIONS) requests
+app.options('*', cors(corsOptions)); // Preflight handling
+
+
 // Use security and caching headers
 app.use(helmet());
 
@@ -28,13 +33,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors(corsOptions));
-
-
-app.use(bodyParser.json());
-
-// Handle preflight (OPTIONS) requests
-app.options('*', cors(corsOptions)); // Preflight handling
 app.use(bodyParser.json());
 
 // Scrape Flipkart products based on search term and number of pages
