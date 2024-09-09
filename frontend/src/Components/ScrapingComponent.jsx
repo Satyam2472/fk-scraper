@@ -13,7 +13,7 @@ const ScrapingComponent = () => {
     setIsScraping(true); // Show the loading message when scraping starts
     try {
       // Send the search term and number of pages to scrape to the backend
-      const response = await axios.post('https://fk-scraper-y62n.onrender.com/scrape', { searchTerm, numPages });
+      const response = await axios.post('https://fk-scraper-dlef.onrender.com/scrape', { searchTerm, numPages });
       setScrapingData(response.data);  // Set the scraped data to display
     } catch (error) {
       console.error('Error scraping data:', error);

@@ -11,12 +11,19 @@ const port = process.env.PORT || 3000
 // CORS options to allow requests from your frontend domain
 const corsOptions = {
   origin: 'https://fk-product-detail-scraper.netlify.app', // Your Netlify frontend URL
-  methods: ['GET', 'POST'], // Define allowed HTTP methods
-  credentials: true, // If you need to send cookies or other credentials
+  methods: ['GET', 'POST', 'OPTIONS'], // Allowing necessary methods including OPTIONS
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+  credentials: true, // Allow credentials if needed
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 };
 
 // Use middleware
 app.use(cors(corsOptions)); // Applying CORS options
+app.use(bodyParser.json());
+
+// Handle preflight (OPTIONS) requests
+app.options('*', cors(corsOptions)); // Preflight handling
 app.use(bodyParser.json());
 
 // Scrape Flipkart products based on search term and number of pages
