@@ -11,10 +11,10 @@ const port = process.env.PORT || 3000
 
 // Explicitly allowing your frontend Netlify URL
 const corsOptions = {
-  origin: "*",
-  // origin: "https://fk-product-detail-scraper.netlify.app",
-  methods: "GET,POST,OPTIONS",
-  allowedHeaders: ["Content-Type"],
+  // origin: "*",
+  origin: 'https://fk-scraper-1.onrender.com/',
+  methods: 'GET,POST,OPTIONS',
+  allowedHeaders: ['Content-Type'],
   optionsSuccessStatus: 200, // For older browsers
 };
 
