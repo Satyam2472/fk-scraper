@@ -24,12 +24,14 @@ app.options('*', cors(corsOptions)); // Preflight handling
 
 
 // Use security and caching headers
-app.use(helmet({crossOriginResourcePolicy: false,}));
+app.use(helmet({crossOriginResourcePolicy: true,}));
 
 // Add Cache-Control and other headers
 app.use((req, res, next) => {
-  res.setHeader('Cache-Control', 'no-store');  // Adjust as needed
+  res.setHeader('Cache-Control', 'no-store');  
   res.setHeader('X-Content-Type-Options', 'nosniff');
+  console.log('Request Method:', req.method);
+  console.log('Request Headers:', req.headers);
   next();
 });
 
