@@ -22,14 +22,6 @@ app.use(cors(corsOptions));
 // Handle preflight (OPTIONS) requests
 app.options('*', cors(corsOptions)); // Preflight handling
 
-app.use((req, res, next) => {
-  res.setHeader('Cache-Control', 'no-store');  
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  console.log('Request Method:', req.method);
-  console.log('Request Headers:', req.headers);
-  next();
-});
-
 
 // Use security and caching headers
 app.use(helmet({crossOriginResourcePolicy: true,}));
