@@ -12,10 +12,10 @@ const port = process.env.PORT || 3000
 // Explicitly allowing your frontend Netlify URL
 const corsOptions = {
   // origin: "*",
-  origin: 'https://fk-scraper-first.vercel.app',
-  methods: 'GET,POST,OPTIONS',
-  allowedHeaders: ['Content-Type'],
-  optionsSuccessStatus: 200, // For older browsers
+  origin: ["https://fk-scraper-first.vercel.app"],
+  methods: ["GET","POST","OPTIONS"],
+  allowedHeaders: ["Content-Type"],
+  // optionsSuccessStatus: 200, // For older browsers
 };
 
 app.use(cors(corsOptions));
