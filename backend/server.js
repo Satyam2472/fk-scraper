@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 
 // Scrape Flipkart products based on search term and number of pages
 // app.post('/scrape', async (req, res) => {
-app.post('https://fk-scraper.vercel.app/scrape', async (req, res) => {
+app.post('https://fk-scraper-first.vercel.app/scrape', async (req, res) => {
 
   const { searchTerm, numPages } = req.body;  // Get number of pages from request body
   console.log(`Scraping Flipkart for: ${searchTerm} for ${numPages} pages`);
