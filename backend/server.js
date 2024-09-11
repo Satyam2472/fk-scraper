@@ -21,7 +21,7 @@ const port = process.env.PORT || 3000
 // app.options('*', cors(corsOptions)); // Preflight handling
 
 app.use((req, res, next) => {
-  res.origin('Access-Control-Allow-Origin', 'https://fk-scraper-first.vercel.app');
+  res.origin('Access-Control-Allow-Origin', 'https://fk-scraper-1.onrender.com');
   res.method('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   
