@@ -21,9 +21,9 @@ const port = process.env.PORT || 3000
 // app.options('*', cors(corsOptions)); // Preflight handling
 
 app.use((req, res, next) => {
-  req.origin('Access-Control-Allow-Origin', 'https://fk-scraper-1.onrender.com');
-  req.method('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
-  req.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.set('Access-Control-Allow-Origin', 'https://fk-scraper-1.onrender.com');
+  res.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+  res.set('Access-Control-Allow-Headers', 'Content-Type');
   
   // Handle preflight OPTIONS request
   if (req.method === 'OPTIONS') {
