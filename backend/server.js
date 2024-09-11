@@ -9,16 +9,30 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3000
 
-// Explicitly allow your frontend URL
-const corsOptions = {
-  origin: "https://fk-scraper-first.vercel.app",  // Frontend URL
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type"],
-};
+// // Explicitly allow your frontend URL
+// const corsOptions = {
+//   origin: "https://fk-scraper-first.vercel.app",  // Frontend URL
+//   methods: ["GET", "POST", "OPTIONS"],
+//   allowedHeaders: ["Content-Type"],
+// };
 
-app.use(cors(corsOptions));
-// Handle preflight (OPTIONS) requests
-app.options('*', cors(corsOptions)); // Preflight handling
+// app.use(cors(corsOptions));
+// // Handle preflight (OPTIONS) requests
+// app.options('*', cors(corsOptions)); // Preflight handling
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://fk-scraper-first.vercel.app');
+  res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  
+  // Handle preflight OPTIONS request
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+
+  next();
+});
+
 
 // Use security and caching headers
 app.use(helmet({crossOriginResourcePolicy: true,}));
