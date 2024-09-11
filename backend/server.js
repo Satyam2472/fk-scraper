@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000
 
 // Explicitly allow your frontend URL
 const corsOptions = {
-  origin: "https://fk-scraper-first.vercel.app",  // Frontend URL
+  origin: "https://fk-scraper-1.onrender.com",  // Frontend URL
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type"],
 };
