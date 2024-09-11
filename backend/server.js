@@ -11,8 +11,8 @@ const port = process.env.PORT || 3000
 
 // Explicitly allowing your frontend Netlify URL
 const corsOptions = {
-  // origin: "*",
-  origin: ["https://fk-scraper-first.vercel.app"],
+  origin: "*",
+  // origin: ["https://fk-scraper-first.vercel.app"],
   methods: ["GET","POST","OPTIONS"],
   allowedHeaders: ["Content-Type"],
   // optionsSuccessStatus: 200, // For older browsers
@@ -21,6 +21,14 @@ const corsOptions = {
 app.use(cors(corsOptions));
 // Handle preflight (OPTIONS) requests
 app.options('*', cors(corsOptions)); // Preflight handling
+
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store');  
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  console.log('Request Method:', req.method);
+  console.log('Request Headers:', req.headers);
+  next();
+});
 
 
 // Use security and caching headers
